@@ -37,7 +37,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="login">
-                <a href="login.html">
+                <a href="login.jsx">
                   Login <i className="fa-solid fa-right-to-bracket" />
                 </a>
               </div>
