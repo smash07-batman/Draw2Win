@@ -37,7 +37,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="login">
-                <a href="login.jsx">
+                <a href="/login">
                   Login <i className="fa-solid fa-right-to-bracket" />
                 </a>
               </div>
@@ -45,6 +45,7 @@ const Home = () => {
           </header>
           <div className="hero-section">
             <img src="./images/logo1.png" alt="" />
+
             <h1>
               Draw<span>2</span>Win
             </h1>
