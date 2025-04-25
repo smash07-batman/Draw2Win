@@ -1,8 +1,7 @@
 "use client";
-
 import React from "react";
 
-const login = () => {
+const signup = () => {
   return (
     <div>
       <section id="login-section">
@@ -69,4 +68,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default signup;

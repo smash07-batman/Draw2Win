@@ -6,7 +6,6 @@ const DrawingCanvas = () => {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [isEraser, setIsEraser] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -44,22 +43,6 @@ const DrawingCanvas = () => {
     ctxRef.current.stroke();
   };
 
-  const handleEraser = () => {
-    const canvas = canvasRef.current;
-    if (isEraser) {
-      ctxRef.current.strokeStyle = "#2c8de7";
-      // Switch to pencil cursor
-      canvas.style.cursor =
-        "url('https://cdn-icons-png.flaticon.com/512/1071/1071160.png') 16 16, auto"; // pencil
-    } else {
-      ctxRef.current.strokeStyle = "#fff";
-      // Switch to eraser cursor
-      canvas.style.cursor =
-        "url('https://cdn-icons-png.flaticon.com/512/1250/1250610.png') 4 28, auto"; // eraser
-    }
-    setIsEraser(!isEraser);
-  };
-
   const handleClear = () => {
     const canvas = canvasRef.current;
     ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
@@ -87,12 +70,6 @@ const DrawingCanvas = () => {
           className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
         >
           Clear
-        </button>
-        <button
-          onClick={handleEraser}
-          className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-        >
-          {isEraser ? "Switch to Pencil" : "Eraser"}
         </button>
         <button
           onClick={handleSubmit}
