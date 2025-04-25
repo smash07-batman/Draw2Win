@@ -1,11 +1,116 @@
-import React from "react";
+"use client";
+
+import React, { useRef, useState, useEffect } from "react";
+
+const DrawingCanvas = () => {
+  const canvasRef = useRef(null);
+  const ctxRef = useRef(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [isEraser, setIsEraser] = useState(false);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    canvas.width = 600;
+    canvas.height = 400;
+    canvas.style.border = "3px solid #333";
+
+    // ✅ Set custom pencil cursor with adjusted hotspot
+    canvas.style.cursor =
+      "url('https://cdn-icons-png.flaticon.com/512/1071/1071160.png') 16 16, auto"; // Adjusted hotspot
+
+    const ctx = canvas.getContext("2d");
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#2c8de7";
+    ctx.lineWidth = 4;
+    ctxRef.current = ctx;
+  }, []);
+
+  const startDrawing = ({ nativeEvent }) => {
+    const { offsetX, offsetY } = nativeEvent;
+    ctxRef.current.beginPath();
+    ctxRef.current.moveTo(offsetX, offsetY);
+    setIsDrawing(true);
+  };
+
+  const finishDrawing = () => {
+    ctxRef.current.closePath();
+    setIsDrawing(false);
+  };
+
+  const draw = ({ nativeEvent }) => {
+    if (!isDrawing) return;
+    const { offsetX, offsetY } = nativeEvent;
+    ctxRef.current.lineTo(offsetX, offsetY);
+    ctxRef.current.stroke();
+  };
+
+  const handleEraser = () => {
+    const canvas = canvasRef.current;
+    if (isEraser) {
+      ctxRef.current.strokeStyle = "#2c8de7";
+      // Switch to pencil cursor
+      canvas.style.cursor =
+        "url('https://cdn-icons-png.flaticon.com/512/1071/1071160.png') 16 16, auto"; // pencil
+    } else {
+      ctxRef.current.strokeStyle = "#fff";
+      // Switch to eraser cursor
+      canvas.style.cursor =
+        "url('https://cdn-icons-png.flaticon.com/512/1250/1250610.png') 4 28, auto"; // eraser
+    }
+    setIsEraser(!isEraser);
+  };
+
+  const handleClear = () => {
+    const canvas = canvasRef.current;
+    ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  const handleSubmit = () => {
+    const dataUrl = canvasRef.current.toDataURL("image/png");
+    console.log("Submitted drawing data:", dataUrl);
+    alert("Drawing submitted (check console for image data)");
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-4 my-10">
+      <canvas
+        ref={canvasRef}
+        onMouseDown={startDrawing}
+        onMouseUp={finishDrawing}
+        onMouseMove={draw}
+        onMouseLeave={finishDrawing}
+        className="rounded bg-white shadow-md"
+      />
+      <div className="flex gap-4">
+        <button
+          onClick={handleClear}
+          className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+        >
+          Clear
+        </button>
+        <button
+          onClick={handleEraser}
+          className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+        >
+          {isEraser ? "Switch to Pencil" : "Eraser"}
+        </button>
+        <button
+          onClick={handleSubmit}
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const Home = () => {
   return (
     <div>
       <>
         <section id="home">
-          <a href="#home">
+          <a href="/">
             <i className="fa-solid fa-angles-up top-arrow" />
           </a>
           <header>
@@ -45,6 +150,7 @@ const Home = () => {
           </header>
           <div className="hero-section">
             <img src="./images/logo1.png" alt="" />
+            <DrawingCanvas />
 
             <h1>
               Draw<span>2</span>Win

@@ -19,13 +19,13 @@ a {
   text-decoration: none;
 }
 
-/* body,
+body,
 html {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
   scroll-behavior: smooth;
-} */
+}
 section {
   scroll-margin-top: 30px;
 }
@@ -101,11 +101,9 @@ nav a {
 
 #home {
   background-image: url(../../public/images/bgimage.png);
-  height: 90vh;
 }
 
 .hero-section {
-  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,7 +111,7 @@ nav a {
 }
 
 .hero-section img {
-  width: 300px;
+  width: 120px;
   margin-bottom: 20px;
   margin-top: 50px;
   animation: pop-up 2s ease-out infinite;
