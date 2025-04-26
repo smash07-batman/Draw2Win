@@ -45,8 +45,6 @@ const Home = () => {
           </header>
           <div className="hero-section">
             <img src="./images/logo1.png" alt="" />
-            <DrawingCanvas />
-
             <h1>
               Draw<span>2</span>Win
             </h1>
