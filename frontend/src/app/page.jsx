@@ -62,7 +62,7 @@ const DrawingCanvas = () => {
         onMouseUp={finishDrawing}
         onMouseMove={draw}
         onMouseLeave={finishDrawing}
-        className="rounded bg-zinc-500 shadow-md"
+        className="rounded bg-zinc-600 shadow-md"
       />
       <div className="flex gap-4">
         <button
