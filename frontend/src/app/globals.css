@@ -78,7 +78,7 @@ nav a {
   color: var(--skyblue-clr);
 }
 .logo-links img {
-  width: 200px;
+  width: 50px;
 }
 
 #mobile {
@@ -111,7 +111,7 @@ nav a {
 }
 
 .hero-section img {
-  width: 120px;
+  width: 250px;
   margin-bottom: 20px;
   margin-top: 50px;
   animation: pop-up 2s ease-out infinite;
